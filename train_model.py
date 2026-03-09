@@ -3,10 +3,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 import joblib
 
-# --- Sample dataset (you can swap in your own) ---
+# --- Sample dataset (you can swap in reading your own dataset) ---
 data = pd.DataFrame({
     "monthly_spend":  [50, 60, 70, 120, 150, 200, 80, 90, 40, 30],
-    "tenure_months":  [ 2,  3,  6,  12,  24,  36,  4,  5,  1,  1],
+    "tenure_months":  [ 2,  3,  2,  12,  24,  36,  4,  5,  1,  20],
     "support_calls":  [ 3,  1,  0,   1,   0,   0,  2,  1,  4,  3],
     "churn":          [ 1,  1,  0,   0,   0,   0,  1,  0,  1,  1]
 })
@@ -24,6 +24,13 @@ model.fit(X_train, y_train)
 # --- Evaluate the model on the held-out test set ---
 accuracy = model.score(X_test, y_test)
 print(f"Test accuracy: {accuracy:.2f}")
+
+# plot hte decision tree
+from sklearn.tree import plot_tree
+import matplotlib.pyplot as plt
+plt.figure(figsize=(12,8))
+plot_tree(model, feature_names=X.columns, class_names=["No Churn", "Churn"], filled=True)
+plt.show()
 
 # --- NEW STEP: Save the trained model to a file ---
 joblib.dump(model, "churn_model.pkl")
