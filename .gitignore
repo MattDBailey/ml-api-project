@@ -207,4 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 # Trained model artifacts
-*.pkl
+#*.pkl
